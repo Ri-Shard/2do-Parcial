@@ -25,50 +25,38 @@ namespace GUI.Controllers
         }
       [HttpPost]
 
- public ActionResult<TiqueteViewModel> Post(TiqueteInputModel tiqueteInput)
-        {
-            Tiquete tiquete= MapearTiquete(tiqueteInput);
-            var response = _tiqueteService .Guardar(tiquete);
-            if (response.Error) 
-            {
-                ModelState.AddModelError("Guardar Tiquete", response.Mensaje);
-                var problemDetails = new ValidationProblemDetails(ModelState)
-                {
-                    Status = StatusCodes.Status400BadRequest,
-                };
-                return BadRequest(problemDetails);
-                
-            }
-            return Ok(response.Tiquete);
-        }
-
-      [HttpGet]
-      public IEnumerable<TiqueteViewModel> Get() {
-          var tiquetes = _tiqueteService.ConsultarTodos().Select(u => new TiqueteViewModel(u));
-          return tiquetes;
-      }
-        // GET: api/Cliente/5
-        [HttpGet("{id}")]
-        public ActionResult<TiqueteViewModel> Get(string id)
+        // GET: api/Tiquete
+        [HttpGet]
+        public IEnumerable<TiqueteViewModel> Gets()
         {
-            var tiquete =  _tiqueteService .BuscarxCod(id);
-            if (tiquete != null) {
-            var tiqueteViewModel = new TiqueteViewModel(tiquete);
-            return tiqueteViewModel;                
-            }
-            return NotFound();
-
+            var tiquetes = _tiqueteService.ConsultarTodos().Select(p=> new TiqueteViewModel(p));
+            return tiquetes;
         }
-
-          private Tiquete  MapearTiquete(TiqueteInputModel tiqueteInput)
+        // POST: api/tiquete
+        [HttpPost]
+        public ActionResult<TiqueteViewModel> Post(TiqueteInputModel tiqueteInput)
+        {
+            Tiquete tiquete = MapearTiquete(tiqueteInput);
+            var response = _tiqueteService.Guardar(tiquete);
+            if (response.Error) 
+            {
+                ModelState.AddModelError("Guardar Tiquete", response.Mensaje);
+                var problemDetails = new ValidationProblemDetails(ModelState){
+                    Status = StatusCodes.Status400BadRequest,
+                };
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(response.Tiquete);
+        }
+        private Tiquete MapearTiquete(TiqueteInputModel tiqueteInput)
         {
             var tiquete = new Tiquete
             {
                 Codigo = tiqueteInput.Codigo,
-                Nombre = tiqueteInput.Nombre,
                 Ruta = tiqueteInput.Ruta,
                 IdCliente = tiqueteInput.IdCliente,
-                Valor = tiqueteInput.Valor,
+                Nombre = tiqueteInput.Nombre,
+                Valor = tiqueteInput.Valor
             };
             return tiquete;
         }

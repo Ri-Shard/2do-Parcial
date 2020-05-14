@@ -26,13 +26,12 @@
 
                 <tbody>
 
-                    <tr *ngFor="let tiquete of tiquetes; index as i ">
+                    <tr *ngFor="let tiquete of tiquetes |filtroTiquete: searchText; index as i ">
 
                         <th scope="row">{{ i + 1 }}</th>
-                            <td>asdsad</td>
-                            <td>{{1231233}} </td>
+                            <td>{{tiquete.codigo}} </td>
                             <td>{{tiquete.ruta}}</td>
-                            <td>{{tiquete.nombred}}</td>
+                            <td>{{tiquete.nombre}}</td>
                             <td>{{tiquete.idCliente}}</td>
                             </tr>
                 </tbody>

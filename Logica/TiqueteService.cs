@@ -19,8 +19,12 @@ namespace Logica
         {
             try
             {
-             _context.Tiquetes.Add(tiquete);
-             _context.SaveChanges();
+                var tiqueteBuscado = _context.Tiquetes.Find(tiquete.Codigo);
+                if(tiqueteBuscado != null){
+                    return new GuardarTiqueteResponse("Error, el tiquete ya se encuentra registrado");
+                }
+                _context.Tiquetes.Add(tiquete);
+                _context.SaveChanges();
                 return new GuardarTiqueteResponse(tiquete);
             }
             catch (Exception e)
@@ -28,35 +32,27 @@ namespace Logica
                 return new GuardarTiqueteResponse($"Error de la Aplicacion: {e.Message}");
             }
         }
-
-                public class GuardarTiqueteResponse 
+        public List<Tiquete> ConsultarTodos()
         {
-            public GuardarTiqueteResponse(Tiquete tiquete)
-            {
-                Error = false;
-                Tiquete = tiquete;
-            }
-            public GuardarTiqueteResponse(string mensaje)
-            {
-                Error = true;
-                Mensaje = mensaje;
-            }
-            public bool Error { get; set; }
-            public string Mensaje { get; set; }
-            public Tiquete Tiquete { get; set; }
+            List<Tiquete> tiquetes = _context.Tiquetes.ToList();
+            return tiquetes;
         }
-
-                 public List<Tiquete> ConsultarTodos()
+    }
+    public class GuardarTiqueteResponse 
+    {
+        public GuardarTiqueteResponse(Tiquete tiquete)
         {
-            List<Tiquete> Tiquetes = _context.Tiquetes.ToList();
-            return Tiquetes;
+            Error = false;
+            Tiquete = tiquete;
         }
-
-
-            public Tiquete BuscarxCod(string cod)
+        public GuardarTiqueteResponse(string mensaje)
         {
-            Tiquete tiquete = _context.Tiquetes.Find(cod);
-            return tiquete;
+            Error = true;
+            Mensaje = mensaje;
         }
+        public bool Error { get; set; }
+        public string Mensaje { get; set; }
+        public Tiquete Tiquete { get; set; }
+    }
 }
-}
+

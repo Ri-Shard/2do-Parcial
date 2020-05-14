@@ -2,6 +2,6 @@ export class Tiquete {
         codigo: string;
         ruta: string;
         idCliente: string;
-        nombred: string;
+        nombre: string;
         valor: number;
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Tiquete } from '../models/tiquete';
 import { TiqueteService } from '../../services/tiquete.service';
-import { FormGroup, FormBuilder, Validators, AbstractControl} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, MaxLengthValidator} from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModalComponent } from 'src/app/@base/alert-modal/alert-modal.component';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-registro',
@@ -13,6 +14,7 @@ import { AlertModalComponent } from 'src/app/@base/alert-modal/alert-modal.compo
 export class RegistroComponent implements OnInit {
   formGroup: FormGroup;
   tiquete: Tiquete;
+  tiquetes: Tiquete[];
   searchText: string;
   _nombre: string;
   _id: string;
@@ -22,39 +24,20 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
         this.buildForm();
-    const seleccionar = document.querySelector('select');
-    seleccionar.addEventListener('change', valor);
-    function valor() {
-      const eleccion = seleccionar.value;
+    this.tiqueteService.get().subscribe(result => {
+      this.tiquetes = result;
 
-      if (eleccion === '1') {
-        this._valor = 90000;
-      } else if (eleccion === '2') {
-        this._valor = 35000;
-      } else if (eleccion === '3') {
-        this._valor = 40000;
-      } else if (eleccion === '4') {
-        this._valor = 60000;
-      } else {
-        this._valor = 0;
-      }
-    }
-
+    });
   }
 
     private buildForm() {
-          this.tiquete = new Tiquete();
-          this.tiquete.idCliente = '';
-          this.tiquete.nombred = '';
-          this.tiquete.codigo = '';
-          this.tiquete.ruta = '';
-          this.tiquete.valor = 0;
+
           this.formGroup = this.formBuilder.group({
-            idCliente: [this.tiquete.idCliente, Validators.required],
-            nombred: [this.tiquete.nombred, Validators.required],
-            codigo: [this.tiquete.codigo, [Validators.required, this.ValidaSexo]],
-            ruta: [this.tiquete.ruta, [Validators.required]],
-            valor: [this.tiquete.valor, [Validators.required]]
+            idCliente: ['', Validators.required],
+            nombred: ['', Validators.required],
+            codigo: ['', [Validators.required]],
+            ruta: ['', [Validators.required]],
+            valor: [0, [Validators.required]]
 
           });
         }
@@ -82,33 +65,38 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  private ValidaSexo(control: AbstractControl) {
-     const sexo = control.value;
-     if (sexo.toLocaleUpperCase() !== 'M' && sexo.toLocaleUpperCase() !== 'F') {
-      return { validSexo: true, messageSexo: 'Sexo No Valido' };
-     }
-      return null;
-    }
-    buscar() {
-      console.log(this.tiquete.idCliente);
-      this.tiqueteService.buscar(this.tiquete.idCliente).subscribe(p => {
-        if (p != null) {
-          this._nombre = p.nombred;
-          console.log(this._nombre);
-        }
-      }
 
-      );
+    buscar(index: string) {
+  this.tiquetes.forEach(element => {
+    // tslint:disable-next-line: triple-equals
+    if (index == element.idCliente) {
+      this._nombre = element.nombre;
     }
+    this.modal();
+  });
+    }
+
+
     modal() {
-
-    }
-     save() {
-      localStorage.setItem('id', this.tiquete.idCliente);
-    }
-
-
-
-
+      this.modalService.open(ModalComponent);
   }
 
+   valor(eleccion: string) {
+
+   if (eleccion === '1') {
+      this._valor = 90000;
+    } else if (eleccion === '2') {
+      this._valor = 35000;
+    } else if (eleccion === '3') {
+      this._valor = 40000;
+    } else if (eleccion === '4') {
+      this._valor = 60000;
+    } else {
+      this._valor = 0;
+    }
+  }
+
+
+
+
+}

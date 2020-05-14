@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PersonaService } from './services/persona.service';
 import { AlertModalComponent } from './@base/alert-modal/alert-modal.component';
 import { ModalComponent } from './Tiquete/modal/modal.component';
+import { FiltroTiquetePipe } from './pipe/filtro-tiquete.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ModalComponent } from './Tiquete/modal/modal.component';
     ConsultaComponent,
     RegistroComponent,
     AlertModalComponent,
-    ModalComponent
+    ModalComponent,
+    FiltroTiquetePipe
   ],
   imports: [
     ReactiveFormsModule,
