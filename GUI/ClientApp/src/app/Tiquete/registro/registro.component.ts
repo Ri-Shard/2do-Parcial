@@ -16,11 +16,30 @@ export class RegistroComponent implements OnInit {
   searchText: string;
   _nombre: string;
   _id: string;
+  _valor: number;
   // tslint:disable-next-line: max-line-length
   constructor( private tiqueteService: TiqueteService, private formBuilder: FormBuilder, private modalService: NgbModal) { }
 
   ngOnInit() {
         this.buildForm();
+    const seleccionar = document.querySelector('select');
+    seleccionar.addEventListener('change', valor);
+    function valor() {
+      const eleccion = seleccionar.value;
+
+      if (eleccion === '1') {
+        this._valor = 90000;
+      } else if (eleccion === '2') {
+        this._valor = 35000;
+      } else if (eleccion === '3') {
+        this._valor = 40000;
+      } else if (eleccion === '4') {
+        this._valor = 60000;
+      } else {
+        this._valor = 0;
+      }
+    }
+
   }
 
     private buildForm() {
@@ -29,12 +48,14 @@ export class RegistroComponent implements OnInit {
           this.tiquete.nombred = '';
           this.tiquete.codigo = '';
           this.tiquete.ruta = '';
-
+          this.tiquete.valor = 0;
           this.formGroup = this.formBuilder.group({
             idCliente: [this.tiquete.idCliente, Validators.required],
             nombred: [this.tiquete.nombred, Validators.required],
             codigo: [this.tiquete.codigo, [Validators.required, this.ValidaSexo]],
-            ruta: [this.tiquete.ruta, [Validators.required]]
+            ruta: [this.tiquete.ruta, [Validators.required]],
+            valor: [this.tiquete.valor, [Validators.required]]
+
           });
         }
       get control() {
@@ -85,5 +106,9 @@ export class RegistroComponent implements OnInit {
      save() {
       localStorage.setItem('id', this.tiquete.idCliente);
     }
+
+
+
+
   }
 

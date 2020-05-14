@@ -21,23 +21,27 @@
                             </div>
                             <div class="form-group ">
                                 <label>Nombre</label>
-                                <input type="text "   name="nombre "   formControlName="nombred"  class="form-control " value="{{_nombre}}" readonly [ngClass]="{  'is-invalid':  control.nombred.errors} "  />
+                                <input type="text "   name="nombre "   formControlName="nombred" value="{{_nombre}}"  class="form-control " value="{{_nombre}}" readonly [ngClass]="{  'is-invalid':  control.nombred.errors} "  />
                                 </div>
                                 <hr/>
                                 <div class="form-group ">
                                     <label>Ruta: </label>
                                     <select id="ruta " name="ruta " class="custom-select custom-select-lg mb-6">
-                                    <option value="1 ">Valledupar-Bogota</option>
-                                    <option value="2 ">Valledupar-Barranquilla</option>
-                                    <option value="3 ">Valledupar-Santa Marta</option>
-                                    <option value="4 ">Valledupar-Cartagena</option>
+                                    <option value="1">Valledupar-Bogota</option>
+                                    <option value="2">Valledupar-Barranquilla</option>
+                                    <option value="3">Valledupar-Santa Marta</option>
+                                    <option value="4">Valledupar-Cartagena</option>
                                   </select>
                                     </div>
-                                    <div class="mb-2 ">
-                                        <button class="btn btn-primary " (click)="onSubmit() "   [disabled]="formGroup.invalid ">Register</button>
-                                            <button class="btn btn-danger "  type="reset ">Cancel</button>
-                                    </div>
-                                    </form>
-                                    </div>
-                                    </div>
-                                    </div>
+                                    <div class="form-group ">
+                                        <label>Valor</label>
+                                        <input type="text "   name="valor "   formControlName="valor" value="{{_valor}}"  class="form-control " readonly [ngClass]="{  'is-invalid':  control.valor.errors} "  />
+                                        </div>
+                                        <div class="mb-2 ">
+                                            <button class="btn btn-primary " (click)="onSubmit() "   [disabled]="formGroup.invalid ">Register</button>
+                                                <button class="btn btn-danger "  type="reset ">Cancel</button>
+                                        </div>
+                                        </form>
+                                        </div>
+                                        </div>
+                                        </div>

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Persona } from '../models/persona';
-import { PersonaService } from 'src/app/services/persona.service';
 import { Tiquete } from '../models/tiquete';
 import { TiqueteService } from 'src/app/services/tiquete.service';
 
@@ -14,12 +12,11 @@ export class ConsultaComponent implements OnInit {
   searchText: string;
   tiquetes: Tiquete[];
   tiquete: Tiquete;
-  constructor(private personaService: PersonaService, private tiqueteService: TiqueteService) { }
+  constructor( private tiqueteService: TiqueteService) { }
 
   ngOnInit() {
     this.tiqueteService.get().subscribe(result => {
       this.tiquetes = result;
     });
-
   }
 }

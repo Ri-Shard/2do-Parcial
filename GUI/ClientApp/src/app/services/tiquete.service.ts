@@ -30,7 +30,7 @@ export class TiqueteService {
   get(): Observable<Tiquete[]> {
     return this.http.get<Tiquete[]>(this.baseUrl + 'api/Tiquete')
         .pipe(
-            tap(_ => this.handleErrorService.log('datos enviados')),
+            tap(_ => this.handleErrorService.log('datos recibidos')),
             catchError(this.handleErrorService.handleError<Tiquete[]>('Consulta Tiquete', null))
         );
   }
