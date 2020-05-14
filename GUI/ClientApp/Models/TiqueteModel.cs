@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GUI.Models {
 
-    public class TiquetenputModel {
+    public class TiqueteInputModel {
         [Required(ErrorMessage = "El codigo  es requerido")]
         public string Codigo { get; set; }
 
@@ -24,7 +24,7 @@ namespace GUI.Models {
         public decimal Valor { get; set; }
     }   
 
-    public class TiqueteViewModel : TiquetenputModel {
+    public class TiqueteViewModel : TiqueteInputModel {
         public TiqueteViewModel () {
 
         }

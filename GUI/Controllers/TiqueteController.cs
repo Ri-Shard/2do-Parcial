@@ -23,6 +23,8 @@ namespace GUI.Controllers
         
              _tiqueteService = new TiqueteService(context);
         }
+      [HttpPost]
+
  public ActionResult<TiqueteViewModel> Post(TiqueteInputModel tiqueteInput)
         {
             Tiquete tiquete= MapearTiquete(tiqueteInput);
@@ -50,10 +52,25 @@ namespace GUI.Controllers
         public ActionResult<TiqueteViewModel> Get(string id)
         {
             var tiquete =  _tiqueteService .BuscarxCod(id);
-            if (tiquete == null) return NotFound();
+            if (tiquete != null) {
             var tiqueteViewModel = new TiqueteViewModel(tiquete);
-            return tiqueteViewModel;
+            return tiqueteViewModel;                
+            }
+            return NotFound();
+
         }
 
+          private Tiquete  MapearTiquete(TiqueteInputModel tiqueteInput)
+        {
+            var tiquete = new Tiquete
+            {
+                Codigo = tiqueteInput.Codigo,
+                Nombre = tiqueteInput.Nombre,
+                Ruta = tiqueteInput.Ruta,
+                IdCliente = tiqueteInput.IdCliente,
+                Valor = tiqueteInput.Valor,
+            };
+            return tiquete;
+        }
     }
 }

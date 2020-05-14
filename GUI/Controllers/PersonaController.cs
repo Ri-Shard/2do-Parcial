@@ -23,6 +23,7 @@ namespace GUI.Controllers
         
             _personaService = new PersonaService(context);
         }
+      [HttpPost]
 
  public ActionResult<PersonaViewModel> Post(PersonaInputModel personaInput)
         {
@@ -50,15 +51,6 @@ namespace GUI.Controllers
                 Sexo = personaInput.Sexo,
             };
             return persona;
-        }
-
-        public Persona buscar (string id)
-        {
-            var persona = _personaService.Buscarxid(id);
-            if(persona !=null)
-            {
-            return persona;
-            }
         }
 
     }

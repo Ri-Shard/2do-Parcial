@@ -53,7 +53,7 @@ namespace Logica
         }
 
 
-                public Tiquete BuscarxCod(string cod)
+            public Tiquete BuscarxCod(string cod)
         {
             Tiquete tiquete = _context.Tiquetes.Find(cod);
             return tiquete;

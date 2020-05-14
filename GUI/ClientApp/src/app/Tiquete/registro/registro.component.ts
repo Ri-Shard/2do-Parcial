@@ -69,11 +69,8 @@ export class RegistroComponent implements OnInit {
       return null;
     }
     buscar() {
-      this.save();
-      this._id = this.tiquete.idCliente;
-      console.log(this._id);
-      this.save();
-      this.tiqueteService.buscar(this._id).subscribe(p => {
+      console.log(this.tiquete.idCliente);
+      this.tiqueteService.buscar(this.tiquete.idCliente).subscribe(p => {
         if (p != null) {
           this._nombre = p.nombred;
           console.log(this._nombre);
