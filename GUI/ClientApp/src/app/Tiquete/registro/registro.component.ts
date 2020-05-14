@@ -14,6 +14,8 @@ export class RegistroComponent implements OnInit {
   formGroup: FormGroup;
   tiquete: Tiquete;
   searchText: string;
+  _nombre: string;
+  _id: string;
   // tslint:disable-next-line: max-line-length
   constructor( private tiqueteService: TiqueteService, private formBuilder: FormBuilder, private modalService: NgbModal) { }
 
@@ -66,13 +68,25 @@ export class RegistroComponent implements OnInit {
      }
       return null;
     }
-    buscar(id: string)
-    {
-    
-    }
-    modal(id: string)
-    {
+    buscar() {
+      this.save();
+      this._id = this.tiquete.idCliente;
+      console.log(this._id);
+      this.save();
+      this.tiqueteService.buscar(this._id).subscribe(p => {
+        if (p != null) {
+          this._nombre = p.nombred;
+          console.log(this._nombre);
+        }
+      }
 
+      );
+    }
+    modal() {
+
+    }
+     save() {
+      localStorage.setItem('id', this.tiquete.idCliente);
     }
   }
 

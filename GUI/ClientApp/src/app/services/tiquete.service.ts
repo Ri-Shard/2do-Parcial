@@ -1,9 +1,18 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HandleHttpErrorService } from '../@base/handle-http-error.service';
 import { Observable } from 'rxjs';
 import { Tiquete } from '../Tiquete/models/tiquete';
 import { tap, catchError } from 'rxjs/operators';
+
+const httpOptionsPut = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  responseType: 'text'
+};
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +42,15 @@ export class TiqueteService {
             catchError(this.handleErrorService.handleError<Tiquete>('Registrar Tiquete', null))
         );
 }
+
+buscar(id: string): Observable<Tiquete> {
+  const url = `${this.baseUrl + 'api/Tiquete'}/${id}`;
+  return this.http.get<Tiquete>(url, httpOptions)
+    .pipe(
+      tap(_ => this.handleErrorService.log('datos enviados')),
+      catchError(this.handleErrorService.handleError<Tiquete>('Buscar Persona', null))
+    );
+}
+
 
 }

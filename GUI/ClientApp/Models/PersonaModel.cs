@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace GUI.Models {
 
     public class PersonaInputModel {
-        [Required(ErrorMessage = "El nombre  es requerido")]
+        [Required(ErrorMessage = "La identificacion es requerida")]
         public string Identificacion { get; set; }
 
-        [Required(ErrorMessage = "La identificacion es requerida")]
+        [Required(ErrorMessage = " el nombre es requerido")]
         public string Nombre { get; set; }
 
-        [Required(ErrorMessage = "El Valor  es requerido")]
+        [SexoValidacion( ErrorMessage="El Sexo debe ser F o M")]
         public string Sexo { get; set; }
         
 
@@ -32,4 +32,19 @@ namespace GUI.Models {
         }
 
     }
+    public class SexoValidacion : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if ((value.ToString().ToUpper() == "M") || (value.ToString().ToUpper() == "F"))
+            {
+                return ValidationResult.Success;
+            }
+            else
+            {
+                return new ValidationResult(ErrorMessage);
+            }
+        }
+    }
+
 }

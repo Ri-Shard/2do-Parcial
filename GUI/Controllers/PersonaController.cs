@@ -23,5 +23,43 @@ namespace GUI.Controllers
         
             _personaService = new PersonaService(context);
         }
+
+ public ActionResult<PersonaViewModel> Post(PersonaInputModel personaInput)
+        {
+            Persona persona = MapearPersona(personaInput);
+            var response = _personaService.Guardar(persona);
+            if (response.Error) 
+            {
+                ModelState.AddModelError("Guardar Persona", response.Mensaje);
+                var problemDetails = new ValidationProblemDetails(ModelState)
+                {
+                    Status = StatusCodes.Status400BadRequest,
+                };
+                return BadRequest(problemDetails);
+                
+            }
+            return Ok(response.Persona);
+        }
+
+          private Persona  MapearPersona(PersonaInputModel personaInput)
+        {
+            var persona = new Persona
+            {
+                Identificacion = personaInput.Identificacion,
+                Nombre = personaInput.Nombre,
+                Sexo = personaInput.Sexo,
+            };
+            return persona;
+        }
+
+        public Persona buscar (string id)
+        {
+            var persona = _personaService.Buscarxid(id);
+            if(persona !=null)
+            {
+            return persona;
+            }
+        }
+
     }
 }
