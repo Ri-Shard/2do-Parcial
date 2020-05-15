@@ -11,12 +11,9 @@ export class ConsultaComponent implements OnInit {
 
   searchText: string;
   tiquetes: Tiquete[];
-  tiquete: Tiquete;
   constructor( private tiqueteService: TiqueteService) { }
 
   ngOnInit() {
-    this.tiqueteService.get().subscribe(result => {
-      this.tiquetes = result;
-    });
+    this.tiqueteService.get().subscribe(result => {this.tiquetes = result; });
   }
 }

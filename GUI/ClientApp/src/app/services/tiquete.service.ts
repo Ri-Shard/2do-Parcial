@@ -5,15 +5,21 @@ import { Observable } from 'rxjs';
 import { Tiquete } from '../Tiquete/models/tiquete';
 import { tap, catchError } from 'rxjs/operators';
 
+const httpOptionsPut = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  responseType: 'text'
+};
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class TiqueteService {
 
   baseUrl: string;
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private handleErrorService: HandleHttpErrorService) 
-  {
+  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private handleErrorService: HandleHttpErrorService) {
     this.baseUrl = baseUrl;
   }
   get(): Observable<Tiquete[]> {

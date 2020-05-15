@@ -23,11 +23,10 @@ namespace GUI.Controllers
         
              _tiqueteService = new TiqueteService(context);
         }
-      [HttpPost]
 
         // GET: api/Tiquete
         [HttpGet]
-        public IEnumerable<TiqueteViewModel> Gets()
+        public IEnumerable<TiqueteViewModel> Get()
         {
             var tiquetes = _tiqueteService.ConsultarTodos().Select(p=> new TiqueteViewModel(p));
             return tiquetes;

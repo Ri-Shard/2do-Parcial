@@ -23,26 +23,23 @@ namespace GUI.Controllers
         
             _personaService = new PersonaService(context);
         }
-      [HttpPost]
-
- public ActionResult<PersonaViewModel> Post(PersonaInputModel personaInput)
-        {
-            Persona persona = MapearPersona(personaInput);
-            var response = _personaService.Guardar(persona);
-            if (response.Error) 
-            {
-                ModelState.AddModelError("Guardar Persona", response.Mensaje);
-                var problemDetails = new ValidationProblemDetails(ModelState)
-                {
-                    Status = StatusCodes.Status400BadRequest,
-                };
-                return BadRequest(problemDetails);
-                
-            }
-            return Ok(response.Persona);
-        }
-
-          private Persona  MapearPersona(PersonaInputModel personaInput)
+        // POST: api/Persona
+        [HttpPost]
+        public ActionResult<PersonaViewModel> Post(PersonaInputModel personaInput)
+        {
+            Persona persona = MapearPersona(personaInput);
+            var response = _personaService.Guardar(persona);
+            if (response.Error) 
+            {
+                ModelState.AddModelError("Guardar Persona", response.Mensaje);
+                var problemDetails = new ValidationProblemDetails(ModelState){
+                    Status = StatusCodes.Status400BadRequest,
+                };
+                return BadRequest(response.Mensaje);
+            }
+            return Ok(response.Persona);
+        }
+        private Persona MapearPersona(PersonaInputModel personaInput)
         {
             var persona = new Persona
             {
@@ -52,6 +49,5 @@ namespace GUI.Controllers
             };
             return persona;
         }
-
     }
 }
