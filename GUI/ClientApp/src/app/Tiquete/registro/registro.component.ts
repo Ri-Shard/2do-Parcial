@@ -66,15 +66,14 @@ export class RegistroComponent implements OnInit {
   }
 
 
-    buscar(index: string) {
-  this.tiquetes.forEach(element => {
-    // tslint:disable-next-line: triple-equals
-    if (index == element.idCliente) {
-      this._nombre = element.nombre;
-    }
-    this.modal();
-  });
-    }
+  buscar(index: string) {
+    this.tiquetes.forEach(element => {
+      // tslint:disable-next-line: triple-equals
+      if (index == element.idCliente) {
+        this._nombre = element.nombre;
+      }
+    });
+  }
 
 
     modal() {

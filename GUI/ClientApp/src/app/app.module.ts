@@ -12,10 +12,10 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ConsultaComponent } from './Tiquete/consulta/consulta.component';
 import { RegistroComponent } from './Tiquete/registro/registro.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PersonaService } from './services/persona.service';
 import { AlertModalComponent } from './@base/alert-modal/alert-modal.component';
 import { ModalComponent } from './Tiquete/modal/modal.component';
 import { FiltroTiquetePipe } from './pipe/filtro-tiquete.pipe';
+import { TiqueteService } from './services/tiquete.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { FiltroTiquetePipe } from './pipe/filtro-tiquete.pipe';
   ],
 
   entryComponents: [AlertModalComponent],
-  providers: [PersonaService],
+  providers: [TiqueteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

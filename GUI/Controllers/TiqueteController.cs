@@ -51,11 +51,11 @@ namespace GUI.Controllers
         {
             var tiquete = new Tiquete
             {
-                Codigo = tiqueteInput.Codigo,
-                Ruta = tiqueteInput.Ruta,
-                IdCliente = tiqueteInput.IdCliente,
-                Nombre = tiqueteInput.Nombre,
-                Valor = tiqueteInput.Valor
+                Codigo = tiqueteInput.codigo,
+                Ruta = tiqueteInput.ruta,
+                IdCliente = tiqueteInput.idCliente,
+                Nombre = tiqueteInput.nombre,
+                Valor = tiqueteInput.valor
             };
             return tiquete;
         }

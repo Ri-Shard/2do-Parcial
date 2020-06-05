@@ -10,15 +10,15 @@ namespace GUI.Models {
      public class TiqueteInputModel
     {
         [Required(ErrorMessage = "El codigo es requerido")]
-        public string Codigo { get; set; }
+        public string codigo { get; set; }
         [Required(ErrorMessage = "La ruta es requerida")]
-        public string Ruta { get; set; }
+        public string ruta { get; set; }
         [Required(ErrorMessage = "La identificacion del cliente es requerido")]
-        public string IdCliente { get; set; }
+        public string idCliente { get; set; }
         [Required(ErrorMessage = "el nombre es requerido")]
-        public string Nombre { get; set; }
+        public string nombre { get; set; }
         [Required(ErrorMessage = "El valor es requerido")]
-        public decimal Valor { get; set; }
+        public decimal valor { get; set; }
     }
     public class TiqueteViewModel : TiqueteInputModel
     {
@@ -28,11 +28,11 @@ namespace GUI.Models {
         }
         public TiqueteViewModel(Tiquete tiquete)
         {
-            Codigo = tiquete.Codigo;
-            Ruta = tiquete.Ruta;
-            IdCliente = tiquete.IdCliente;
-            Nombre = tiquete.Nombre;
-            Valor = tiquete.Valor;
+            codigo = tiquete.Codigo;
+            ruta = tiquete.Ruta;
+            idCliente = tiquete.IdCliente;
+            nombre = tiquete.Nombre;
+            valor = tiquete.Valor;
         }
     }
 }
